@@ -3,6 +3,21 @@ steps:
   args: ['build', '-t', 'europe-west4-docker.pkg.dev/${PROJECT_ID}/my-first-repo/express-test:latest', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'europe-west4-docker.pkg.dev/${PROJECT_ID}/my-first-repo/express-test:latest']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+    - 'run'
+    - 'deploy'
+    - 'express-run'
+    - '--image=europe-west4-docker.pkg.dev/playground-again/my-first-repo/express-test@sha256:bb2dca8f6c1d55b55bffbddeec1d165d2174d7016e600f9a9c2841ae7f75fb2e'
+    - '--region=europe-west4'
+    - '--set-env-vars=ENV=prod,NODE_ENV=production'
+    - '--allow-unauthenticated'
+    - '--project=playground-again'
+    - '--no-cpu-boost'
+    - '--network=practice-vpc'
+    - '--subnet=cloud-run-subnet-europe-4'
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
