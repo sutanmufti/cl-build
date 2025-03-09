@@ -3,3 +3,6 @@ steps:
   args: ['build', '-t', 'europe-west4-docker.pkg.dev/${PROJECT_ID}/my-first-repo', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'europe-west4-docker.pkg.dev/${PROJECT_ID}/my-first-repo']
+
+options:
+  logging: CLOUD_LOGGING_ONLY
