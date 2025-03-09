@@ -8,7 +8,7 @@ app.use('/test', router)
 app.get('/', (req, res)=>{
     
     return res.json({
-        message: 'hello world!! this is a dev'
+        message: 'hello world!! this is a dev. version 2.'
     })
 })
 
