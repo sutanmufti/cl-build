@@ -9,7 +9,7 @@ steps:
     - 'run'
     - 'deploy'
     - 'express-run'
-    - '--image=europe-west4-docker.pkg.dev/playground-again/my-first-repo/express-test@sha256:bb2dca8f6c1d55b55bffbddeec1d165d2174d7016e600f9a9c2841ae7f75fb2e'
+    - '--image=europe-west4-docker.pkg.dev/playground-again/my-first-repo/express-test:latest'
     - '--region=europe-west4'
     - '--set-env-vars=ENV=prod,NODE_ENV=production'
     - '--allow-unauthenticated'
