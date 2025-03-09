@@ -8,7 +8,7 @@ steps:
   args:
     - 'run'
     - 'deploy'
-    - 'express-run'
+    - 'express-test'
     - '--image=europe-west4-docker.pkg.dev/playground-again/my-first-repo/express-test:latest'
     - '--region=europe-west4'
     - '--set-env-vars=ENV=prod,NODE_ENV=production'
