@@ -1,22 +1,24 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'europe-west4-docker.pkg.dev/${PROJECT_ID}/my-first-repo/express-test:latest', '.']
+  args: ['build', '-t', '${_REGION_N_}-docker.pkg.dev/${PROJECT_ID}/${_REPO_N_}/${_IMAGE_N_}:latest', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'europe-west4-docker.pkg.dev/${PROJECT_ID}/my-first-repo/express-test:latest']
+  args: ['push', '${_REGION_N_}-docker.pkg.dev/${PROJECT_ID}/${_REPO_N_}/${_IMAGE_N_}:latest']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
   args:
     - 'run'
     - 'deploy'
-    - 'express-test'
-    - '--image=europe-west4-docker.pkg.dev/playground-again/my-first-repo/express-test:latest'
-    - '--region=europe-west4'
+    - '${_IMAGE_N_}'
+    - '--image=${_REGION_N_}-docker.pkg.dev/${PROJECT_ID}/${_REPO_N_}/${_IMAGE_N_}:latest'
+    - '--region=${_REGION_N_}'
+    - '--concurrency=100'
     - '--set-env-vars=ENV=prod,NODE_ENV=production'
     - '--allow-unauthenticated'
-    - '--project=playground-again'
+    - '--project=${PROJECT_ID}'
     - '--no-cpu-boost'
-    - '--network=practice-vpc'
-    - '--subnet=cloud-run-subnet-europe-4'
+    - '--network=${_NETWORK_N_}'
+    - '--subnet=${_SUBNET_N_}'
+    - '--platform=managed'
 
 
 options:
