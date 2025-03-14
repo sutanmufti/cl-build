@@ -1,9 +1,17 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
+  id: build
   args: ['build', '-t', '${_REGION_N_}-docker.pkg.dev/${PROJECT_ID}/${_REPO_N_}/${_IMAGE_N_}:latest', '.']
 - name: 'gcr.io/cloud-builders/docker'
+  id: push
+  waitFor: 
+    - build
   args: ['push', '${_REGION_N_}-docker.pkg.dev/${PROJECT_ID}/${_REPO_N_}/${_IMAGE_N_}:latest']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  id: deploy
+  waitFor:
+    - build 
+    - push
   entrypoint: gcloud
   args:
     - 'run'
